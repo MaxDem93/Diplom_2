@@ -1,0 +1,10 @@
+utils\UserGenerator.class
+model\ExistingCredentials.class
+client\UserClient.class
+client\OrderClient.class
+model\Credentials.class
+model\UserNewData.class
+model\Assertions.class
+model\Order.class
+model\User.class
+utils\UserNewDataGenerator.class
