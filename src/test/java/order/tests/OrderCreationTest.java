@@ -1,4 +1,4 @@
-package orderTests;
+package order.tests;
 
 import client.OrderClient;
 import client.UserClient;
@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import utils.UserGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ public class OrderCreationTest {
         ValidatableResponse response = orderClient.createOrder(order);
         check.successIsFalse400(response);
     }
+
     @Test
     @DisplayName("Создание заказа для авторизованного пользователя")
     public void orderOfAuthorizedUserCreatedSuccessfully() {

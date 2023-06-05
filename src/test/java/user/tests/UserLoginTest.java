@@ -1,4 +1,4 @@
-package userTests;
+package user.tests;
 
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
@@ -25,6 +25,7 @@ public class UserLoginTest {
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
+
     @Test
     @DisplayName("Авторизация пользователя")
     public void userLoggedInSuccessfully() {

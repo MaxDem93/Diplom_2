@@ -4,6 +4,7 @@ public class ExistingCredentials {
     private String email = "liyjgjkjhgblk@gmail.com";
     private String password;
     private String name;
+
     public ExistingCredentials(String email, String password, String name) {
         this.email = email;
         this.password = password;

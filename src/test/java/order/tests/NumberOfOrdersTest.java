@@ -1,4 +1,4 @@
-package userTests;
+package order.tests;
 
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
@@ -10,11 +10,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import utils.UserGenerator;
-import utils.UserNewDataGenerator;
+
 import static io.restassured.RestAssured.given;
-public class UserDataUpdate {
+
+public class NumberOfOrdersTest {
     protected final UserGenerator generator = new UserGenerator();
-    protected final UserNewDataGenerator generatorMail = new UserNewDataGenerator();
     private final UserClient client = new UserClient();
     private final Assertions check = new Assertions();
     private String accessToken;
@@ -23,30 +23,29 @@ public class UserDataUpdate {
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
+
     @Test
-    @DisplayName("Обновление данных пользователя")
-    public void userDataUpdatedSuccessfully() {
+    @DisplayName("Проверка получения заказа сгенерированного пользователя")
+    public void numberOfOrdersReceivedSuccessfully() {
         var user = generator.random();
         accessToken = client.createWithToken(user);
-        var userNewData = generatorMail.random();
-        ValidatableResponse response = given().log().all()
-                .header("Authorization", accessToken)
-                .contentType(ContentType.JSON)
-                .and()
-                .body(userNewData)
-                .when()
-                .patch("/api/auth/user").then();
+        ValidatableResponse response = given()
+                .auth().oauth2(accessToken.replace("Bearer ", ""))
+                .get("/api/orders").then();
         check.successIsTrue200(response);
     }
+
     @Test
-    @DisplayName("Обновление данных пользователя без авторизации")
-    public void userDataUpdateFailedWithoutAuthorization() {
+    @DisplayName("Проверка получения заказа сгенерированного пользователя без авторизации")
+    public void numberOfOrdersNotReceivedWithoutAuthorization() {
         var user = generator.random();
-        client.create(user);
-        var userNewData = generatorMail.random();
-        ValidatableResponse response = client.updateData(userNewData);
+        accessToken = client.createWithToken(user);
+        ValidatableResponse response = given()
+                .auth().oauth2(" ")
+                .get("/api/orders").then();
         check.successIsFalse401(response);
     }
+
     @After
     public void deleteUser() {
         if (accessToken != null) {
@@ -56,5 +55,4 @@ public class UserDataUpdate {
                     .delete("https://stellarburgers.nomoreparties.site/api/auth/user");
         }
     }
-
 }
