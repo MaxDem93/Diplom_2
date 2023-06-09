@@ -1,9 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+log/
+.DS_Store
 .idea/
 *.iml
 *.iws
-.build
-log/
+.build/
+.target/
+!reportFolder/ReportFile.txt
 
