@@ -8,7 +8,7 @@ import model.Order;
 import static io.restassured.RestAssured.given;
 
 public class OrderClient {
-    private final String apiOrd = "/api/orders";
+    private final String API_ORD = "/api/orders";
 
     @Step("Создание заказа")
     public ValidatableResponse createOrder(Order order) {
@@ -17,7 +17,7 @@ public class OrderClient {
                 .and()
                 .body(order)
                 .when()
-                .post(apiOrd).then();
+                .post(API_ORD).then();
     }
 
     @Step("Создание заказа с неправильными ингредиентами")
@@ -27,7 +27,7 @@ public class OrderClient {
                 .and()
                 .body("{\"ingredients\": \"rkjdvfhlrkjvhfbkb\"}")
                 .when()
-                .post(apiOrd)
+                .post(API_ORD)
                 .then();
     }
 }
