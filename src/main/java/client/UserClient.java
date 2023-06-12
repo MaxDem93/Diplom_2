@@ -10,9 +10,9 @@ import model.UserNewData;
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
-    private final String apiRegister = "/api/auth/register";
-    private final String apiUser = "/api/auth/user";
-    private final String apiLogin = "/api/auth/login";
+    private final String API_REGISTER = "/api/auth/register";
+    private final String API_USER = "/api/auth/user";
+    private final String API_LOGIN = "/api/auth/login";
     private String accessToken;
 
     @Step("Создание пользователя")
@@ -22,7 +22,7 @@ public class UserClient {
                 .and()
                 .body(user)
                 .when()
-                .post(apiRegister)
+                .post(API_REGISTER)
                 .then().log().all();
     }
 
@@ -33,7 +33,7 @@ public class UserClient {
                 .and()
                 .body(user)
                 .when()
-                .post(apiLogin)
+                .post(API_LOGIN)
                 .then().log().all();
     }
 
@@ -44,7 +44,7 @@ public class UserClient {
                 .and()
                 .body(creds)
                 .when()
-                .post(apiLogin)
+                .post(API_LOGIN)
                 .then().log().all();
     }
 
@@ -55,7 +55,7 @@ public class UserClient {
                 .and()
                 .body(userNewData)
                 .when()
-                .patch(apiUser)
+                .patch(API_USER)
                 .then().log().all();
     }
 
@@ -66,7 +66,7 @@ public class UserClient {
                 .and()
                 .body(creds)
                 .when()
-                .post(apiLogin)
+                .post(API_LOGIN)
                 .then().log().all();
     }
 
@@ -76,7 +76,7 @@ public class UserClient {
                 .and()
                 .body(user)
                 .when()
-                .post(apiRegister)
+                .post(API_REGISTER)
                 .then().statusCode(200)
                 .extract().path("accessToken");
     }

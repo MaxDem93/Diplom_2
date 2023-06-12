@@ -1,8 +1,8 @@
 package user.tests;
 
+import client.BaseClient;
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import model.Assertions;
@@ -14,7 +14,7 @@ import utils.UserNewDataGenerator;
 
 import static io.restassured.RestAssured.given;
 
-public class UserDataUpdate {
+public class UserDataUpdateTest {
     protected final UserGenerator generator = new UserGenerator();
     protected final UserNewDataGenerator generatorMail = new UserNewDataGenerator();
     private final UserClient client = new UserClient();
@@ -23,7 +23,7 @@ public class UserDataUpdate {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        BaseClient.installAllSpec();
     }
 
     @Test

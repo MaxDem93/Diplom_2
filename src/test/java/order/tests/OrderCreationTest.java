@@ -1,9 +1,9 @@
 package order.tests;
 
+import client.BaseClient;
 import client.OrderClient;
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import model.Assertions;
@@ -29,7 +29,7 @@ public class OrderCreationTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
+        BaseClient.installAllSpec();
         ingredients.add("60d3b41abdacab0026a733c6");
         ingredients.add("61c0c5a71d1f82001bdaaa6f");
     }
