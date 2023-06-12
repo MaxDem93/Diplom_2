@@ -1,18 +1,21 @@
 package client;
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import model.Credentials;
 import model.User;
 import model.UserNewData;
+
 import static io.restassured.RestAssured.given;
+
 public class UserClient {
     private final String apiRegister = "/api/auth/register";
     private final String apiUser = "/api/auth/user";
     private final String apiLogin = "/api/auth/login";
     private String accessToken;
 
-
+    @Step("Создание пользователя")
     public ValidatableResponse create(User user) {
         return given().log().all()
                 .contentType(ContentType.JSON)
@@ -22,6 +25,8 @@ public class UserClient {
                 .post(apiRegister)
                 .then().log().all();
     }
+
+    @Step("Залогиниться")
     public ValidatableResponse login(User user) {
         return given().log().all()
                 .contentType(ContentType.JSON)
@@ -31,6 +36,8 @@ public class UserClient {
                 .post(apiLogin)
                 .then().log().all();
     }
+
+    @Step("Залогиниться под существующим пользователем")
     public ValidatableResponse loginWithCreds(Credentials creds) {
         return given().log().all()
                 .contentType(ContentType.JSON)
@@ -40,6 +47,8 @@ public class UserClient {
                 .post(apiLogin)
                 .then().log().all();
     }
+
+    @Step("Обновляем данные")
     public ValidatableResponse updateData(UserNewData userNewData) {
         return given().log().all()
                 .contentType(ContentType.JSON)
@@ -49,6 +58,8 @@ public class UserClient {
                 .patch(apiUser)
                 .then().log().all();
     }
+
+    @Step("Создать пользователя, который уже зарегистрирован")
     public ValidatableResponse createWithCreds(Credentials creds) {
         return given().log().all()
                 .contentType(ContentType.JSON)
@@ -58,6 +69,7 @@ public class UserClient {
                 .post(apiLogin)
                 .then().log().all();
     }
+
     public String createWithToken(User user) {
         return given().log().all()
                 .contentType(ContentType.JSON)

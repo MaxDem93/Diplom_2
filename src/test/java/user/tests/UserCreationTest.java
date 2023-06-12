@@ -1,4 +1,4 @@
-package userTests;
+package user.tests;
 
 import client.UserClient;
 import io.qameta.allure.junit4.DisplayName;
@@ -23,6 +23,7 @@ public class UserCreationTest {
     public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
+
     @Test
     @DisplayName("Создание уникального пользоватлея")
     public void uniqueUserCreatedSuccessfully() {
@@ -30,6 +31,7 @@ public class UserCreationTest {
         ValidatableResponse creationResponse = client.create(user);
         accessToken = check.successIsTrue200(creationResponse);
     }
+
     @Test
     @DisplayName("Создание пользователя без имени")
     public void creationFailsWithoutName() {
@@ -38,6 +40,7 @@ public class UserCreationTest {
         ValidatableResponse creationResponse = client.create(user);
         accessToken = check.successIsFalse403(creationResponse);
     }
+
     @Test
     @DisplayName("Создание пользователя без почты")
     public void creationFailsWithoutEmail() {
@@ -46,6 +49,7 @@ public class UserCreationTest {
         ValidatableResponse creationResponse = client.create(user);
         accessToken = check.successIsFalse403(creationResponse);
     }
+
     @Test
     @DisplayName("Создание пользователя без пароля")
     public void creationFailsWithoutPassword() {
@@ -54,6 +58,7 @@ public class UserCreationTest {
         ValidatableResponse creationResponse = client.create(user);
         accessToken = check.successIsFalse403(creationResponse);
     }
+
     @Test
     @DisplayName("Создание уже существующего пользователя")
     public void existingUserCreationFails() {
@@ -62,6 +67,7 @@ public class UserCreationTest {
         ValidatableResponse creationResponse1 = client.create(user);
         accessToken = check.successIsFalse403(creationResponse1);
     }
+
     @After
     public void deleteUser() {
         if (accessToken != null) {

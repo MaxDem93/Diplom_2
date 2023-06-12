@@ -4,6 +4,7 @@ public class Credentials {
     private String email;
     private String password;
     private String name;
+
     public Credentials(String email, String password, String name) {
         this.email = email;
         this.password = password;
@@ -17,6 +18,7 @@ public class Credentials {
     public static Credentials from(User user) {
         return new Credentials(user.getEmail(), user.getPassword(), user.getName());
     }
+
     public String getEmail() {
         return email;
     }
